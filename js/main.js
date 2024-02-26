@@ -1,5 +1,17 @@
-let usuario = "Benjamin";
-let contraseña = "654321";
+
+function usuario (usuarioIngreso,contraseñaIngreso){
+  this.usuarioIngreso = usuarioIngreso;
+  this.contraseñaIngreso = contraseñaIngreso;
+  this.componentesCompu = [];
+
+  this.SumaWhatts = (componentesCompu) => {
+    let whatts = 0;
+    for (let i = 0; i < 3; i++){
+      whatts += componentesCompu[i];
+    }
+    return whatts;
+  }
+}
 
 let usuarioIngreso;
 let contraseñaIngreso;
@@ -7,7 +19,9 @@ let contraseñaIngreso;
 usuarioIngreso = prompt("Bienvenido, ingrese su usuario:");
 contraseñaIngreso = prompt("Ingrese su contraseña:");
 
-while (usuarioIngreso !== usuario || contraseñaIngreso !== contraseña) {
+const Usuario1 = new usuario (usuarioIngreso,contraseñaIngreso)
+
+while (usuarioIngreso !== Usuario1.usuarioIngreso || contraseñaIngreso !== Usuario1.contraseñaIngreso) {
   alert("Usuario o Contraseña Incorrectos");
   usuarioIngreso = prompt("Bienvenido, ingrese su usuario:");
   contraseñaIngreso = prompt("Ingrese su contraseña:");
@@ -15,9 +29,11 @@ while (usuarioIngreso !== usuario || contraseñaIngreso !== contraseña) {
 
 alert(
   "Hola " +
-    usuario +
+    Usuario1.usuarioIngreso +
     " bienvenido a tu calculadora de fuente de alimentacion para tu PC \n \n¿Comenzamos?"
 );
+
+
 
 let marca = prompt(
   "Comenzaremos eligiendo la marca de la PC \n\n 1- AMD \n 2- Intel"
@@ -90,14 +106,7 @@ if (marca == "1") {
       break;
   }
 
-  function watss(mother, procesador, grafica) {
-    let resultadoWatss = mother + procesador + grafica;
-    return resultadoWatss;
-  }
-
-  let Consumo = watss(mother, procesador, grafica);
-
-  alert("El consumo final de la pc es: " + Consumo + "watss");
+  Usuario1.componentesCompu = [mother,procesador,grafica];
 } else {
   let mother = prompt(
     "Seguiremos con la placa madre \n\n 1- Motherboard Msi H510m Plus V3 (55watts) \n 2- Motherboard Asus Prime H610m-k (45watts) \n 3- Motherboard Azrock z390 Phantom Gaming (50watss)"
@@ -156,12 +165,11 @@ if (marca == "1") {
       break;
   }
 
-  function watss(mother, procesador, grafica) {
-    let resultadoWatss = mother + procesador + grafica;
-    return resultadoWatss;
-  }
-
-  let Consumo = watss(mother, procesador, grafica);
-
-  alert("El consumo final de la pc es: " + Consumo + "watss");
+  Usuario1.componentesCompu = [mother,procesador,grafica];
 }
+
+
+
+let totalWatts = Usuario1.SumaWhatts(Usuario1.componentesCompu);   
+
+alert("El consumo final de la pc es: " + totalWatts + "watss");

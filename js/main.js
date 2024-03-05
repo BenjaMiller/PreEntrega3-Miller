@@ -1,16 +1,12 @@
 
-function usuario (usuarioIngreso,contraseñaIngreso){
+function usuario(usuarioIngreso, contraseñaIngreso) {
   this.usuarioIngreso = usuarioIngreso;
   this.contraseñaIngreso = contraseñaIngreso;
   this.componentesCompu = [];
 
-  this.SumaWhatts = (componentesCompu) => {
-    let whatts = 0;
-    for (let i = 0; i < 3; i++){
-      whatts += componentesCompu[i];
-    }
-    return whatts;
-  }
+  this.SumaWhatts = () => {
+    return this.componentesCompu.reduce((total, componente) => total + componente, 0);
+  };
 }
 
 let usuarioIngreso;
@@ -19,9 +15,12 @@ let contraseñaIngreso;
 usuarioIngreso = prompt("Bienvenido, ingrese su usuario:");
 contraseñaIngreso = prompt("Ingrese su contraseña:");
 
-const Usuario1 = new usuario (usuarioIngreso,contraseñaIngreso)
+const Usuario1 = new usuario(usuarioIngreso, contraseñaIngreso);
 
-while (usuarioIngreso !== Usuario1.usuarioIngreso || contraseñaIngreso !== Usuario1.contraseñaIngreso) {
+while (
+  usuarioIngreso !== Usuario1.usuarioIngreso ||
+  contraseñaIngreso !== Usuario1.contraseñaIngreso
+) {
   alert("Usuario o Contraseña Incorrectos");
   usuarioIngreso = prompt("Bienvenido, ingrese su usuario:");
   contraseñaIngreso = prompt("Ingrese su contraseña:");
@@ -32,8 +31,6 @@ alert(
     Usuario1.usuarioIngreso +
     " bienvenido a tu calculadora de fuente de alimentacion para tu PC \n \n¿Comenzamos?"
 );
-
-
 
 let marca = prompt(
   "Comenzaremos eligiendo la marca de la PC \n\n 1- AMD \n 2- Intel"
@@ -88,25 +85,25 @@ if (marca == "1") {
   }
 
   let grafica = prompt(
-    "Seguiremos con la placa grafica \n\n 1- Rx 580 8gb (25watts) \n 2- Rx 6900xt 16gb (40watts) \n 3- Rx 5700xt 6gb (33watss)"
+    "Seguiremos con la placa grafica \n\n 1- Rx 580 8gb (51watts) \n 2- Rx 6900xt 16gb (60watts) \n 3- Rx 5700xt 6gb (45watss)"
   );
 
   switch (grafica) {
     case "1":
       alert("Seleccionaste Rx 580 8gb");
-      grafica = parseInt("25");
+      grafica = parseInt("51");
       break;
     case "2":
       alert("Seleccionaste Rx 6900xt 16gb");
-      grafica = parseInt("40");
+      grafica = parseInt("60");
       break;
     case "3":
       alert("Seleccionaste Rx 5700xt 6gb");
-      grafica = parseInt("33");
+      grafica = parseInt("45");
       break;
   }
 
-  Usuario1.componentesCompu = [mother,procesador,grafica];
+  Usuario1.componentesCompu = [mother, procesador, grafica];
 } else {
   let mother = prompt(
     "Seguiremos con la placa madre \n\n 1- Motherboard Msi H510m Plus V3 (55watts) \n 2- Motherboard Asus Prime H610m-k (45watts) \n 3- Motherboard Azrock z390 Phantom Gaming (50watss)"
@@ -147,29 +144,38 @@ if (marca == "1") {
   }
 
   let grafica = prompt(
-    "Seguiremos con la placa grafica \n\n 1- RTX 2060 SUPER 8gb (30watts) \n 2- GTX 1650 4gb(20watts) \n 3- RTX 3060 12GB (40watss)"
+    "Seguiremos con la placa grafica \n\n 1- RTX 2060 SUPER 8gb (50watts) \n 2- GTX 1650 4gb(45watts) \n 3- RTX 3060 12GB (60watss)"
   );
 
   switch (grafica) {
     case "1":
       alert("Seleccionaste RTX 2060 SUPER 8gb");
-      grafica = parseInt("30");
+      grafica = parseInt("50");
       break;
     case "2":
       alert("Seleccionaste GTX 1650 4gb");
-      grafica = parseInt("20");
+      grafica = parseInt("45");
       break;
     case "3":
       alert("Seleccionaste RTX 3060 12GB");
-      grafica = parseInt("40");
+      grafica = parseInt("60");
       break;
   }
 
-  Usuario1.componentesCompu = [mother,procesador,grafica];
+  Usuario1.componentesCompu = [mother, procesador, grafica];
 }
 
+let totalWatts = Usuario1.SumaWhatts();
+
+alert("El consumo final de la pc es: " + totalWatts + " watss");
+
+let componentesAltosConsumo = Usuario1.componentesCompu.filter(componente => componente > 50);
+let cantidadComponentesAltosConsumo = componentesAltosConsumo.length;
+
+alert("¡¡¡ALERTA!!!\n" + "Cantidad de componentes que consumen más de 50 vatios: " + cantidadComponentesAltosConsumo +  "\n\nPara estas ocasion se recomienda conseguir una fuente de alimentacion con los whatss necesario y ademas que tenga una certificacion de 80 plus white en adelante");
 
 
-let totalWatts = Usuario1.SumaWhatts(Usuario1.componentesCompu);   
 
-alert("El consumo final de la pc es: " + totalWatts + "watss");
+
+
+

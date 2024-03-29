@@ -1,4 +1,6 @@
-const componentesAgregados = JSON.parse(localStorage.getItem("componentes-agregados"));
+let componentesAgregados;
+
+componentesAgregados = JSON.parse(localStorage.getItem("componentes-agregados"));
 
 const contenedorPcComponentes = document.querySelector("#PC-componentes");
 const contenedorComponentesAcciones = document.querySelector("#componentes-acciones");
@@ -6,7 +8,7 @@ const contenedorComponentesAgregados = document.querySelector("#componentes-agre
 const contenedorTotal = document.querySelector("#total");
 const totalWhatss = document.querySelector("#totalWhatss");
 
-if (componentesAgregados) {
+if (componentesAgregados && componentesAgregados.length > 0) {
   contenedorPcComponentes.classList.remove("disabled");
   contenedorComponentesAcciones.classList.remove("disabled");
   contenedorComponentesAgregados.classList.add("disabled");
@@ -27,21 +29,23 @@ if (componentesAgregados) {
 
     contenedorPcComponentes.appendChild(div);
   });
-
 } else {
-  contenedorComponentesVacio.classList.remove("disabled");
   contenedorPcComponentes.classList.add("disabled");
   contenedorComponentesAcciones.classList.add("disabled");
   contenedorComponentesAgregados.classList.add("disabled");
-  actualizarTotal();
 }
 
 
+actualizarTotal();
+
 function actualizarTotal() {
     const totalWhatssCalculado = componentesAgregados.reduce(
-      (acc, componente) => acc + componente.whats * componente.cantidad,
-      0
+        (acc, componente) => acc + componente.whats * componente.cantidad,
+        0
     );
-    totalWhatss.innerHTML = `${totalWhatssCalculado} wts`;
-  }
-  
+    contenedorTotal.innerHTML = `${totalWhatssCalculado} wts`;
+}
+
+
+
+
